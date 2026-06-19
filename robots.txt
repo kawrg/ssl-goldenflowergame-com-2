@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kawrg.github.io/ssl-goldenflowergame-com-2/sitemap.xml

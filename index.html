@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>炸金花游戏 · 纸牌文化札记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f3eb;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #2d2a24;
+            padding: 1.2rem 1rem 2.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page {
+            max-width: 820px;
+            margin: 0 auto;
+            width: 100%;
+            background: #fcf9f4;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            border-radius: 32px 32px 24px 24px;
+            padding: 2rem 1.8rem 2.4rem;
+        }
+
+        /* 杂志风格横标 */
+        .hero-strip {
+            background: #e3d9cc;
+            padding: 0.9rem 1.2rem;
+            border-radius: 48px;
+            margin-bottom: 2.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            letter-spacing: 0.3px;
+            box-shadow: inset 0 1px 2px #fff8ee, 0 3px 6px rgba(0,0,0,0.03);
+        }
+
+        .hero-strip .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            background: #b8aa94;
+            color: #2b241c;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        .hero-strip .title-tagline {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #3d3327;
+            background: #f0e9df;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            white-space: nowrap;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 350;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin: 0.4rem 0 1.2rem;
+            border-left: 6px solid #c9b79b;
+            padding-left: 1.2rem;
+            color: #332c22;
+        }
+
+        h1 small {
+            display: block;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.4px;
+            color: #706454;
+            margin-top: 0.2rem;
+        }
+
+        .lead-block {
+            background: #f0e9dd;
+            border-radius: 28px;
+            padding: 1.4rem 1.6rem;
+            margin: 1.8rem 0 2rem;
+            font-size: 1.05rem;
+            color: #2f281e;
+            border: 1px solid #e5dacb;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .lead-block p {
+            margin-bottom: 0.4rem;
+        }
+
+        .two-column-text {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 2rem 0 1.2rem;
+        }
+
+        .col {
+            flex: 1 1 240px;
+            background: #fbf8f2;
+            padding: 1.4rem 1.2rem 1.2rem;
+            border-radius: 24px;
+            border: 1px solid #eae1d3;
+            transition: background 0.2s;
+        }
+
+        .col:hover {
+            background: #f6efe5;
+        }
+
+        .col h3 {
+            font-weight: 450;
+            font-size: 1.25rem;
+            border-bottom: 2px dotted #d6c8b2;
+            padding-bottom: 0.3rem;
+            margin-bottom: 0.8rem;
+            color: #40352a;
+        }
+
+        .col p {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: #3d3529;
+        }
+
+        .pull-quote {
+            margin: 2.2rem 0 1.8rem;
+            background: #eae0d1;
+            padding: 1rem 1.8rem;
+            border-radius: 60px 20px 20px 60px;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #2b231b;
+            border-left: 6px solid #b59d81;
+            max-width: 90%;
+        }
+
+        .callout-card {
+            background: #dacfbd;
+            border-radius: 28px;
+            padding: 1.4rem 1.6rem;
+            margin: 2rem 0 1.6rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .callout-card .emoji-marker {
+            font-size: 2rem;
+            background: #f2ebe0;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .callout-card .callout-text {
+            flex: 1;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .callout-card .callout-text a {
+            color: #2b3f2b;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid #7a6b55;
+            padding-bottom: 0.1rem;
+            transition: border-color 0.2s;
+        }
+
+        .callout-card .callout-text a:hover {
+            border-bottom-color: #a38b6b;
+            color: #1e2b1a;
+        }
+
+        .faq-mini {
+            margin: 2.4rem 0 1.2rem;
+            background: #f9f3ea;
+            border-radius: 28px;
+            padding: 1.2rem 1.5rem 1rem;
+            border: 1px solid #ded1be;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid #e3d6c2;
+            padding-bottom: 0.5rem;
+        }
+
+        .faq-mini details:last-child {
+            border-bottom: none;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            cursor: pointer;
+            color: #3f3428;
+            padding: 0.2rem 0;
+            list-style: "▸  ";
+        }
+
+        .faq-mini details[open] summary {
+            list-style: "▾  ";
+        }
+
+        .faq-mini p {
+            margin-top: 0.3rem;
+            padding-left: 1.4rem;
+            color: #4f4335;
+        }
+
+        .footer-note {
+            margin-top: 2.2rem;
+            text-align: right;
+            font-size: 0.9rem;
+            border-top: 1px solid #dad0be;
+            padding-top: 1.2rem;
+            color: #605544;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-note .meta {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 500px) {
+            .page {
+                padding: 1.5rem 1rem 1.8rem;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+                padding-left: 0.8rem;
+            }
+
+            .hero-strip {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+
+            .hero-strip .title-tagline {
+                white-space: normal;
+                font-size: 1rem;
+            }
+
+            .two-column-text {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+
+            .pull-quote {
+                max-width: 100%;
+                border-radius: 28px;
+                padding: 0.9rem 1.2rem;
+            }
+
+            .callout-card {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.2rem;
+            }
+
+            .callout-card .emoji-marker {
+                width: 44px;
+                height: 44px;
+                font-size: 1.6rem;
+            }
+
+            .footer-note {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+
+        <!-- 首页横幅 strip -->
+        <div class="hero-strip">
+            <span class="label">🎴 纸牌文化</span>
+            <span class="title-tagline">三位一体 · 节奏与胆略</span>
+        </div>
+
+        <h1>
+            炸金花游戏
+            <small>从街头到客厅，一副牌的社交哲学</small>
+        </h1>
+
+        <!-- 背景说明 / lead -->
+        <div class="lead-block">
+            <p>在中国许多地方，周末傍晚的茶几上，总有一副半旧的扑克牌。三个人，每人三张，比大点，也较量心理。这就是人们常常聊起的<strong>炸金花游戏</strong>——规则简单，但变化藏在每次加注和弃牌的选择里。它不像桥牌那样精密，也不像梭哈那样漫长，却自有一种日常的博弈温度。</p>
+            <p>有人把它当作茶余饭后的消遣，也有人从牌型概率里琢磨出不少门道。说到底，一副牌五十四张，每人三张，组合不过两万多种，但人的决策让每一局都独一无二。</p>
+        </div>
+
+        <!-- 三段自然介绍，用两列+一段独立 -->
+        <div class="two-column-text">
+            <div class="col">
+                <h3>牌型 · 秩序里的惊喜</h3>
+                <p>豹子、同花顺、金花、顺子、对子……这些称呼在玩家口中带着天然的节奏感。拿到豹子的概率大约四百二十五分之一，正因稀有，每次出现都像一段小高潮。而<strong>同花顺</strong>介于豹子和金花之间，既需要运气，也需要一种牌感的默契。</p>
+                <p>有趣的是，许多老玩家并不刻意记概率，他们更相信“手气”和“表情”。但如果你愿意琢磨，牌型分布本身就是一幅朴素的数学风景。</p>
+            </div>
+            <div class="col">
+                <h3>心理 · 比牌更比人</h3>
+                <p>炸金花游戏里最迷人的环节，或许是“闷牌”——不看牌直接下注。这种盲注带着一点挑衅，也带着一点幽默。你永远不知道对方是在虚张声势，还是真的拿到了金花。牌桌上的对话、停顿、甚至倒茶的动作，都可能成为线索。</p>
+                <p>正因为这种面对面的人情味，炸金花至今没有完全被线上版本取代。真实的呼吸和笑声，是算法无法复制的。</p>
+            </div>
+        </div>
+
+        <!-- 第三段自然介绍，用引用块风格 -->
+        <div class="pull-quote">
+            <p>“很多时候，赢的并不是最大的牌，而是最沉得住气的人。这是一种温和的勇敢，跟生活里许多事情很像。” —— 一位每周玩两局的牌友</p>
+        </div>
+
+        <!-- 提示框 / callout，嵌入链接 -->
+        <div class="callout-card">
+            <span class="emoji-marker">🃏</span>
+            <div class="callout-text">
+                如果你对这类纸牌对局感兴趣，可以看看 <a href="https://ssl-goldenflowergame.com">炸金花游戏</a> 里更完整的玩法介绍和术语梳理。它从民间牌桌走向数字界面，依然保留着三张牌的核心乐趣。
+            </div>
+        </div>
+
+        <!-- FAQ 摘要（轻量） -->
+        <div class="faq-mini">
+            <details>
+                <summary>炸金花和德州扑克有什么不同？</summary>
+                <p>最直观的区别：炸金花每人三张牌，没有公共牌，也不分翻牌转牌河牌。节奏快很多，一局通常在几十秒内结束。另外炸金花允许“喜钱”等地方彩头，社交属性更强。</p>
+            </details>
+            <details>
+                <summary>为什么叫“炸金花”？</summary>
+                <p>“金花”指的是同花（三张同一花色），“炸”大概形容牌局里加注、跟注的爆发感。也有说法是源自地方方言，形容牌面漂亮又热烈。</p>
+            </details>
+            <details>
+                <summary>新手适合玩炸金花吗？</summary>
+                <p>门槛很低。五分钟就能学会牌型大小顺序，剩下的就是在几局里熟悉加注节奏。很多老玩家也乐意带新手，因为牌局会因此多一些不可预测的趣味。</p>
+            </details>
+        </div>
+
+        <!-- 页尾访问提示 -->
+        <div class="footer-note">
+            <span class="meta">题材札记 · 纸牌文化 · 非官方介绍</span>
+            <span>了解更多，可浏览 <a href="https://ssl-goldenflowergame.com" style="color:#4d4032; text-decoration: underline 1px dotted #b09678; text-underline-offset: 4px;">炸金花游戏</a> 专题页面</span>
+        </div>
+
+        <!-- 创作种子仅作变化用，不显示 -->
+    </div>
+</body>
+</html>
